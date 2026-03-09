@@ -1,11 +1,11 @@
-import React, { useRef, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
-import * as THREE from 'three';
 import { motion } from 'framer-motion';
 
 function ParticleField() {
-  const ref = useRef<THREE.Points>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = useRef<any>(null);
 
   const positions = useMemo(() => {
     const count = 2000;
