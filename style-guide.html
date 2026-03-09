@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Style Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:        #D72638;
+    --red-deep:   #9B1A26;
+    --red-bright: #FF3348;
+    --red-muted:  #8B1D27;
+    --black:      #0A0A0A;
+    --black-mid:  #141414;
+    --black-soft: #1E1E1E;
+    --black-card: #181818;
+    --white:      #F5F0EB;
+    --white-dim:  #B8B0A8;
+    --white-faint:#5A5550;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-serif:   'DM Serif Display', serif;
+    --font-mono:    'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #2a2a2a;
+    padding: 0 40px;
+    height: 56px;
+    display: flex; align-items: center; gap: 32px;
+    z-index: 100;
+  }
+  nav a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--red-bright); }
+  nav .logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-right: auto;
+  }
+  nav .logo span { color: var(--red); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 80px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  section + section { border-top: 1px solid #1e1e1e; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 48px;
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    min-height: 340px;
+    background: var(--black);
+    display: flex; align-items: flex-end;
+    padding: 60px 40px 40px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .hero::after {
+    content: 'STYLE';
+    position: absolute;
+    right: -20px; top: -30px;
+    font-family: var(--font-display);
+    font-size: clamp(160px, 22vw, 280px);
+    color: transparent;
+    -webkit-text-stroke: 1px #2a2a2a;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+  .hero-inner { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+  .hero-heading {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 120px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+  }
+  .hero-heading .accent { color: var(--red); }
+  .hero-sub {
+    margin-top: 20px;
+    color: var(--white-dim);
+    font-size: 13px;
+    max-width: 420px;
+  }
+  .version-tag {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  /* ── COLOR SWATCHES ── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .swatch {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+  }
+  .swatch-block {
+    height: 100px;
+    position: relative;
+  }
+  .swatch-block::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 60%);
+  }
+  .swatch-info {
+    background: var(--black-card);
+    padding: 10px 12px;
+  }
+  .swatch-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .swatch-hex {
+    font-size: 11px;
+    color: var(--white-faint);
+    letter-spacing: 0.05em;
+  }
+  .swatch-role {
+    font-size: 10px;
+    color: var(--white-faint);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .type-samples { display: flex; flex-direction: column; gap: 40px; }
+  .type-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .type-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .type-meta { padding-top: 4px; }
+  .type-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .type-meta-name {
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .type-meta-detail {
+    font-size: 11px;
+    color: var(--white-faint);
+    line-height: 1.8;
+  }
+  .sample-display {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--white);
+  }
+  .sample-serif {
+    font-family: var(--font-serif);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    color: var(--white);
+  }
+  .sample-serif em { color: var(--red); }
+  .sample-mono-block {
+    background: var(--black-card);
+    border: 1px solid #2a2a2a;
+    border-left: 3px solid var(--red);
+    padding: 20px 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--white-dim);
+    border-radius: 0 4px 4px 0;
+  }
+  .sample-mono-block .kw { color: var(--red-bright); }
+  .sample-mono-block .str { color: #e8c47a; }
+  .sample-mono-block .cm { color: var(--white-faint); font-style: italic; }
+  .sample-mono-block .fn { color: #7ac8e8; }
+
+  /* ── TYPE SCALE ── */
+  .type-scale { display: flex; flex-direction: column; gap: 4px; }
+  .scale-row {
+    display: flex; align-items: baseline; gap: 20px;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .scale-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--white-faint);
+    text-transform: uppercase;
+    width: 60px;
+    flex-shrink: 0;
+  }
+  .scale-size {
+    font-size: 10px;
+    color: var(--red);
+    width: 50px;
+    flex-shrink: 0;
+  }
+  .scale-sample { color: var(--white); }
+
+  /* ── SPACING ── */
+  .spacing-grid {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .spacing-row {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .spacing-bar-wrap {
+    flex: 1;
+    height: 24px;
+    display: flex; align-items: center;
+  }
+  .spacing-bar {
+    height: 8px;
+    background: linear-gradient(90deg, var(--red), var(--red-deep));
+    border-radius: 2px;
+    position: relative;
+  }
+  .spacing-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    width: 40px;
+  }
+  .spacing-val {
+    font-size: 11px;
+    color: var(--white-dim);
+    width: 50px;
+    text-align: right;
+  }
+
+  /* ── COMPONENTS ── */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .comp-card {
+    background: var(--black-card);
+    border: 1px solid #232323;
+    border-radius: 6px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  .comp-card:hover { border-color: var(--red-muted); }
+  .comp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red), transparent);
+  }
+  .comp-card-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    margin-bottom: 20px;
+  }
+  .comp-card-content { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    padding: 10px 20px;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--red-bright); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(215,38,56,0.35); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid #3a3a3a;
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 8px 18px;
+  }
+  .btn-ghost:hover { background: var(--red); color: #fff; }
+  .btn-icon {
+    background: var(--black-soft);
+    color: var(--white-dim);
+    border: 1px solid #2a2a2a;
+    padding: 9px 14px;
+    font-size: 14px;
+  }
+  .btn-icon:hover { border-color: var(--red); color: var(--red); }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+  }
+  .badge-red { background: rgba(215,38,56,0.15); color: var(--red-bright); border: 1px solid rgba(215,38,56,0.3); }
+  .badge-white { background: rgba(245,240,235,0.08); color: var(--white-dim); border: 1px solid rgba(245,240,235,0.12); }
+  .badge-solid { background: var(--red); color: #fff; }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    background: var(--black-soft);
+    color: var(--white-dim);
+    border: 1px solid #2a2a2a;
+  }
+  .tags-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* Input */
+  .input-demo {
+    width: 100%;
+    background: var(--black-soft);
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-demo:focus { border-color: var(--red); }
+  .input-demo::placeholder { color: var(--white-faint); }
+
+  /* Divider */
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-faint);
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
+
+  /* Alert */
+  .alert {
+    padding: 12px 16px;
+    border-radius: 3px;
+    font-size: 12px;
+    border-left: 3px solid;
+    width: 100%;
+    line-height: 1.5;
+  }
+  .alert-red { background: rgba(215,38,56,0.08); border-color: var(--red); color: var(--white-dim); }
+  .alert-neutral { background: rgba(245,240,235,0.04); border-color: #3a3a3a; color: var(--white-faint); }
+
+  /* ── EFFECTS ── */
+  .effects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .effect-box {
+    height: 120px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    border: 1px solid #2a2a2a;
+    position: relative;
+    overflow: hidden;
+  }
+  .effect-label {
+    position: absolute; bottom: 10px; left: 12px;
+    font-size: 9px; letter-spacing: 0.2em; color: var(--white-faint); text-transform: uppercase;
+  }
+
+  .fx-gradient { background: linear-gradient(135deg, #0A0A0A 0%, #2a0a0e 50%, #0A0A0A 100%); }
+  .fx-mesh {
+    background: radial-gradient(ellipse at 20% 50%, rgba(215,38,56,0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(155,26,38,0.15) 0%, transparent 50%),
+                var(--black-card);
+  }
+  .fx-stripe {
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--black-card) 0px,
+      var(--black-card) 12px,
+      #161616 12px,
+      #161616 24px
+    );
+  }
+  .fx-border {
+    background: var(--black-card);
+    box-shadow: inset 0 0 0 1px rgba(215,38,56,0.3), 0 0 30px rgba(215,38,56,0.08);
+  }
+  .fx-scan {
+    background: var(--black-card);
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(215,38,56,0.03) 2px,
+      rgba(215,38,56,0.03) 4px
+    );
+  }
+  .fx-glow {
+    background: var(--black-card);
+    box-shadow: 0 0 40px rgba(215,38,56,0.2), inset 0 0 30px rgba(215,38,56,0.05);
+  }
+
+  /* ── MOTION TOKENS ── */
+  .motion-grid { display: flex; flex-direction: column; gap: 12px; }
+  .motion-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 100px;
+    gap: 16px; align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .motion-name { font-size: 11px; color: var(--white-dim); }
+  .motion-bar-wrap { background: #1a1a1a; border-radius: 2px; height: 4px; }
+  .motion-bar { height: 100%; background: var(--red); border-radius: 2px; }
+  .motion-val { font-size: 11px; color: var(--white-faint); text-align: right; }
+
+  /* ── GRID SYSTEM ── */
+  .grid-demo { display: flex; flex-direction: column; gap: 12px; }
+  .grid-row-demo { display: flex; gap: 8px; }
+  .grid-col {
+    flex: 1;
+    height: 36px;
+    background: rgba(215,38,56,0.08);
+    border: 1px solid rgba(215,38,56,0.2);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid #1e1e1e;
+    padding: 32px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--white-faint);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  footer strong { color: var(--red); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">PORT<span>.</span>FOLIO</div>
+  <a href="#colors">Colors</a>
+  <a href="#typography">Type</a>
+  <a href="#components">Components</a>
+  <a href="#effects">Effects</a>
+  <a href="#motion">Motion</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">v1.0 — Design System</div>
+    <h1 class="hero-heading">STYLE<br><span class="accent">GUIDE</span></h1>
+    <p class="hero-sub">A brutal, high-contrast visual language built for a developer portfolio. Every token, component, and pattern defined.</p>
+    <span class="version-tag">Draft · March 2026</span>
+  </div>
+</div>
+
+<!-- COLORS -->
+<section id="colors">
+  <div class="reveal">
+    <div class="section-label">01 — Palette</div>
+    <h2 class="section-title">COLORS</h2>
+  </div>
+  <div class="swatch-grid reveal">
+    <div class="swatch"><div class="swatch-block" style="background:#D72638"></div><div class="swatch-info"><div class="swatch-name">Red</div><div class="swatch-hex">#D72638</div><div class="swatch-role">Primary accent</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#FF3348"></div><div class="swatch-info"><div class="swatch-name">Red Bright</div><div class="swatch-hex">#FF3348</div><div class="swatch-role">Hover / active</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#9B1A26"></div><div class="swatch-info"><div class="swatch-name">Red Deep</div><div class="swatch-hex">#9B1A26</div><div class="swatch-role">Gradient end</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#8B1D27"></div><div class="swatch-info"><div class="swatch-name">Red Muted</div><div class="swatch-hex">#8B1D27</div><div class="swatch-role">Subtle borders</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#0A0A0A; border: 1px solid #2a2a2a"></div><div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#0A0A0A</div><div class="swatch-role">Page background</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#141414"></div><div class="swatch-info"><div class="swatch-name">Black Mid</div><div class="swatch-hex">#141414</div><div class="swatch-role">Section bg</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#181818"></div><div class="swatch-info"><div class="swatch-name">Black Card</div><div class="swatch-hex">#181818</div><div class="swatch-role">Card bg</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#1E1E1E"></div><div class="swatch-info"><div class="swatch-name">Black Soft</div><div class="swatch-hex">#1E1E1E</div><div class="swatch-role">Input bg</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#F5F0EB"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#F5F0EB</div><div class="swatch-role">Primary text</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#B8B0A8"></div><div class="swatch-info"><div class="swatch-name">White Dim</div><div class="swatch-hex">#B8B0A8</div><div class="swatch-role">Body copy</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#5A5550"></div><div class="swatch-info"><div class="swatch-name">White Faint</div><div class="swatch-hex">#5A5550</div><div class="swatch-role">Captions / meta</div></div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section id="typography">
+  <div class="reveal">
+    <div class="section-label">02 — Typography</div>
+    <h2 class="section-title">TYPE</h2>
+  </div>
+
+  <div class="type-samples">
+    <div class="type-row reveal">
+      <div class="type-meta">
+        <div class="type-meta-label">Display</div>
+        <div class="type-meta-name">Bebas Neue</div>
+        <div class="type-meta-detail">
+          Weight: 400<br>
+          Use: Hero headings,<br>section titles, large numerals
+        </div>
+      </div>
+      <div class="sample-display">ABCDE<br><span style="color:var(--red)">FGHIJ</span></div>
+    </div>
+
+    <div class="type-row reveal">
+      <div class="type-meta">
+        <div class="type-meta-label">Serif</div>
+        <div class="type-meta-name">DM Serif Display</div>
+        <div class="type-meta-detail">
+          Weight: 400, Italic<br>
+          Use: Sub-headings,<br>pull quotes, emphasis
+        </div>
+      </div>
+      <div class="sample-serif">Crafted with<br><em>intention.</em></div>
+    </div>
+
+    <div class="type-row reveal">
+      <div class="type-meta">
+        <div class="type-meta-label">Mono</div>
+        <div class="type-meta-name">JetBrains Mono</div>
+        <div class="type-meta-detail">
+          Weight: 300, 400, 700<br>
+          Use: Body, code,<br>nav, labels, UI
+        </div>
+      </div>
+      <div class="sample-mono-block">
+<span class="cm">// About me</span>
+<span class="kw">const</span> <span class="fn">developer</span> = {
+  name: <span class="str">"Your Name"</span>,
+  focus: <span class="str">"Full-Stack"</span>,
+  available: <span class="kw">true</span>
+}
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 56px" class="reveal">
+    <div class="section-label" style="margin-bottom: 24px">Type Scale</div>
+    <div class="type-scale">
+      <div class="scale-row"><span class="scale-label">Display</span><span class="scale-size">88px</span><span class="scale-sample" style="font-family:var(--font-display);font-size:52px;line-height:1">HEADLINE</span></div>
+      <div class="scale-row"><span class="scale-label">H1</span><span class="scale-size">56px</span><span class="scale-sample" style="font-family:var(--font-display);font-size:36px;line-height:1">Section Title</span></div>
+      <div class="scale-row"><span class="scale-label">H2</span><span class="scale-size">36px</span><span class="scale-sample" style="font-family:var(--font-serif);font-size:26px">Sub-heading in Serif</span></div>
+      <div class="scale-row"><span class="scale-label">H3</span><span class="scale-size">24px</span><span class="scale-sample" style="font-family:var(--font-mono);font-size:20px;font-weight:700">Card Title Mono Bold</span></div>
+      <div class="scale-row"><span class="scale-label">Body</span><span class="scale-size">14px</span><span class="scale-sample" style="font-size:14px;color:var(--white-dim)">Regular body copy in JetBrains Mono, weight 400, warm off-white.</span></div>
+      <div class="scale-row"><span class="scale-label">Caption</span><span class="scale-size">11px</span><span class="scale-sample" style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-faint)">LABEL / CAPTION / META TEXT</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section id="components">
+  <div class="reveal">
+    <div class="section-label">03 — Components</div>
+    <h2 class="section-title">UI PARTS</h2>
+  </div>
+  <div class="components-grid">
+
+    <div class="comp-card reveal">
+      <div class="comp-card-label">Buttons</div>
+      <div class="comp-card-content">
+        <button class="btn btn-primary">View Work →</button>
+        <button class="btn btn-outline">Learn More</button>
+        <button class="btn btn-ghost">Contact</button>
+        <button class="btn btn-icon">⌘ K</button>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-card-label">Badges</div>
+      <div class="comp-card-content" style="flex-direction:row; flex-wrap:wrap; gap:8px">
+        <span class="badge badge-red">Available</span>
+        <span class="badge badge-white">2026</span>
+        <span class="badge badge-solid">New</span>
+        <span class="badge badge-red">React</span>
+        <span class="badge badge-white">TypeScript</span>
+        <span class="badge badge-red">Open to work</span>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-card-label">Tags / Skills</div>
+      <div class="tags-row">
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Figma</span>
+        <span class="tag">Python</span>
+        <span class="tag">AWS</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-card-label">Form Input</div>
+      <div class="comp-card-content" style="width:100%">
+        <input class="input-demo" placeholder="your@email.com" type="email">
+        <input class="input-demo" placeholder="Subject" type="text">
+        <textarea class="input-demo" placeholder="Message..." rows="3" style="resize:none"></textarea>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-card-label">Alerts</div>
+      <div class="comp-card-content" style="width:100%">
+        <div class="alert alert-red">⚠ Open to new opportunities — reaching out now.</div>
+        <div class="alert alert-neutral">Currently based in New York, NY.</div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-card-label">Dividers</div>
+      <div class="comp-card-content" style="width:100%">
+        <div class="divider">Section</div>
+        <div style="height:1px;background:linear-gradient(90deg,var(--red),transparent);width:100%;margin:8px 0"></div>
+        <div style="height:1px;background:#2a2a2a;width:100%;"></div>
+        <div style="display:flex;gap:8px;align-items:center"><div style="width:6px;height:6px;background:var(--red);border-radius:50%"></div><div style="flex:1;height:1px;background:#2a2a2a"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EFFECTS -->
+<section id="effects">
+  <div class="reveal">
+    <div class="section-label">04 — Visual Texture</div>
+    <h2 class="section-title">EFFECTS</h2>
+  </div>
+  <div class="effects-grid reveal">
+    <div class="effect-box fx-gradient"><span class="effect-label">Dark Gradient</span></div>
+    <div class="effect-box fx-mesh"><span class="effect-label">Red Mesh</span></div>
+    <div class="effect-box fx-stripe"><span class="effect-label">Diagonal Stripe</span></div>
+    <div class="effect-box fx-border"><span class="effect-label">Red Glow Border</span></div>
+    <div class="effect-box fx-scan"><span class="effect-label">Scanline</span></div>
+    <div class="effect-box fx-glow"><span class="effect-label">Ambient Glow</span></div>
+  </div>
+</section>
+
+<!-- MOTION -->
+<section id="motion">
+  <div class="reveal">
+    <div class="section-label">05 — Motion</div>
+    <h2 class="section-title">TIMING</h2>
+  </div>
+  <div class="motion-grid reveal">
+    <div class="motion-row">
+      <div class="motion-name">Instant</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:4%"></div></div>
+      <div class="motion-val">80ms</div>
+    </div>
+    <div class="motion-row">
+      <div class="motion-name">Micro</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:12%"></div></div>
+      <div class="motion-val">150ms</div>
+    </div>
+    <div class="motion-row">
+      <div class="motion-name">Fast</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:20%"></div></div>
+      <div class="motion-val">200ms</div>
+    </div>
+    <div class="motion-row">
+      <div class="motion-name">Base</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:35%"></div></div>
+      <div class="motion-val">350ms</div>
+    </div>
+    <div class="motion-row">
+      <div class="motion-name">Smooth</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:50%"></div></div>
+      <div class="motion-val">500ms</div>
+    </div>
+    <div class="motion-row">
+      <div class="motion-name">Reveal</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:65%"></div></div>
+      <div class="motion-val">600ms</div>
+    </div>
+    <div class="motion-row">
+      <div class="motion-name">Cinematic</div>
+      <div class="motion-bar-wrap"><div class="motion-bar" style="width:85%"></div></div>
+      <div class="motion-val">800ms</div>
+    </div>
+  </div>
+  <div style="margin-top: 32px; padding: 20px 24px; background: var(--black-card); border: 1px solid #232323; border-radius: 4px; font-size: 12px; color: var(--white-dim); line-height: 2" class="reveal">
+    <strong style="color:var(--red)">Easing:</strong> ease-out for entrances · ease-in for exits · ease-in-out for transitions<br>
+    <strong style="color:var(--red)">Principle:</strong> UI feedback ≤200ms · Reveals 400–600ms · Page load staggered 100ms/element<br>
+    <strong style="color:var(--red)">Rule:</strong> Never animate layout properties · Prefer opacity + transform only
+  </div>
+</section>
+
+<!-- SPACING -->
+<section id="spacing">
+  <div class="reveal">
+    <div class="section-label">06 — Spacing</div>
+    <h2 class="section-title">GRID</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px" class="reveal">
+    <div>
+      <div class="section-label" style="margin-bottom:20px">Space Scale (Base 8)</div>
+      <div class="spacing-grid">
+        <div class="spacing-row"><span class="spacing-label">xs</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px"></div></div><span class="spacing-val">4px</span></div>
+        <div class="spacing-row"><span class="spacing-label">sm</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px"></div></div><span class="spacing-val">8px</span></div>
+        <div class="spacing-row"><span class="spacing-label">md</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px"></div></div><span class="spacing-val">16px</span></div>
+        <div class="spacing-row"><span class="spacing-label">lg</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:56px"></div></div><span class="spacing-val">24px</span></div>
+        <div class="spacing-row"><span class="spacing-label">xl</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:80px"></div></div><span class="spacing-val">40px</span></div>
+        <div class="spacing-row"><span class="spacing-label">2xl</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:120px"></div></div><span class="spacing-val">64px</span></div>
+        <div class="spacing-row"><span class="spacing-label">3xl</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:160px"></div></div><span class="spacing-val">80px</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:20px">12-Col Grid</div>
+      <div class="grid-demo">
+        <div class="grid-row-demo">
+          <div class="grid-col" style="flex:12">12</div>
+        </div>
+        <div class="grid-row-demo">
+          <div class="grid-col" style="flex:6">6</div>
+          <div class="grid-col" style="flex:6">6</div>
+        </div>
+        <div class="grid-row-demo">
+          <div class="grid-col" style="flex:4">4</div>
+          <div class="grid-col" style="flex:4">4</div>
+          <div class="grid-col" style="flex:4">4</div>
+        </div>
+        <div class="grid-row-demo">
+          <div class="grid-col" style="flex:3">3</div>
+          <div class="grid-col" style="flex:3">3</div>
+          <div class="grid-col" style="flex:3">3</div>
+          <div class="grid-col" style="flex:3">3</div>
+        </div>
+        <div class="grid-row-demo">
+          <div class="grid-col" style="flex:8">8</div>
+          <div class="grid-col" style="flex:4">4</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;font-size:11px;color:var(--white-faint);line-height:2">
+        Container: 1100px max · Gutter: 24px<br>
+        Margin: 40px (desktop) · 20px (mobile)
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Portfolio <strong>Style Guide</strong> — v1.0</span>
+  <span style="letter-spacing:0.2em">DRAFT · 2026</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Stagger children in grids
+  document.querySelectorAll('.swatch-grid .swatch, .components-grid .comp-card, .effects-grid .effect-box').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 50}ms`;
+  });
+</script>
+</body>
+</html>
