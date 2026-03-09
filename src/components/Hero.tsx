@@ -115,14 +115,14 @@ const Hero: React.FC = () => {
         animate="show"
       >
         <motion.div className="hero-eyebrow" variants={item}>
-          Senior Developer · Available for Opportunities
+          Application Developer · Game Dev
         </motion.div>
         <motion.h1 className="hero-heading" variants={item}>
-          JOHN<br />
-          <span className="accent">DOE</span>
+          JONATHAN<br />
+          <span className="accent">PALMIERI</span>
         </motion.h1>
         <motion.p className="hero-sub" variants={item}>
-          Full-stack engineer with 8+ years crafting scalable systems,
+          Full-stack engineer with 5+ years crafting scalable systems,
           immersive UIs, and cloud-native architectures. I ship products
           that perform.
         </motion.p>
